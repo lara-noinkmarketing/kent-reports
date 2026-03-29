@@ -1,1 +1,254 @@
-<!DOCTYPE html><html><head><title>Kent Rohl Reports</title></head><body><h1>Kent Rohl Reports</h1><p>Reports will appear here.</p></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="robots" content="noindex, nofollow"/>
+  <title>Kent Rohl — Generate Report</title>
+  <style>
+    :root {
+      --green: #245747;
+      --green-2: #2f7862;
+      --gold: #d8b25c;
+      --gold-soft: #f3e6bf;
+      --ink: #183028;
+      --muted: #5f6f68;
+      --bg: #f5f7f6;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body {
+      height: 100%;
+      font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+      background: radial-gradient(circle at top right, rgba(216,178,92,.15), transparent 28%),
+                  linear-gradient(180deg, #f7f8f7 0%, #eef3f0 100%);
+      color: var(--ink);
+    }
+    .page {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 32px 20px;
+    }
+    .card {
+      background: white;
+      border-radius: 28px;
+      padding: 52px 48px;
+      max-width: 520px;
+      width: 100%;
+      box-shadow: 0 20px 60px rgba(24,48,40,.10);
+      text-align: center;
+    }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #f0f7f4;
+      border: 1px solid #c8ddd6;
+      border-radius: 999px;
+      padding: 8px 16px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 28px;
+    }
+    .badge-dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: var(--green);
+    }
+    h1 {
+      font-size: 2rem;
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -.03em;
+      color: var(--ink);
+      margin-bottom: 12px;
+    }
+    .sub {
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1.55;
+      margin-bottom: 36px;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      background: linear-gradient(135deg, var(--green), var(--green-2));
+      color: white;
+      border: none;
+      border-radius: 16px;
+      padding: 18px 36px;
+      font-size: 1.05rem;
+      font-weight: 700;
+      cursor: pointer;
+      width: 100%;
+      letter-spacing: -.01em;
+      transition: transform .15s, box-shadow .15s;
+      box-shadow: 0 8px 24px rgba(36,87,71,.28);
+    }
+    .btn:hover:not(:disabled) {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 32px rgba(36,87,71,.35);
+    }
+    .btn:active:not(:disabled) { transform: translateY(0); }
+    .btn:disabled { opacity: .6; cursor: not-allowed; }
+    .btn svg { flex-shrink: 0; }
+
+    /* Status messages */
+    .status {
+      margin-top: 22px;
+      padding: 14px 18px;
+      border-radius: 14px;
+      font-size: .95rem;
+      font-weight: 600;
+      display: none;
+    }
+    .status.success {
+      background: #f0faf5;
+      border: 1px solid #a7d9bc;
+      color: #1d6645;
+    }
+    .status.error {
+      background: #fff5f5;
+      border: 1px solid #fcc;
+      color: #b91c1c;
+    }
+    .status.show { display: block; }
+
+    /* Spinner */
+    .spinner {
+      width: 20px; height: 20px;
+      border: 2.5px solid rgba(255,255,255,.35);
+      border-top-color: white;
+      border-radius: 50%;
+      animation: spin .7s linear infinite;
+      display: none;
+    }
+    .spinner.show { display: block; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .divider {
+      margin: 32px 0 20px;
+      border: none;
+      border-top: 1px solid #e5ede9;
+    }
+    .note {
+      color: var(--muted);
+      font-size: .86rem;
+      line-height: 1.55;
+    }
+    .footer {
+      margin-top: 32px;
+      text-align: center;
+      color: var(--muted);
+      font-size: .82rem;
+    }
+    .footer a {
+      color: var(--green);
+      text-decoration: none;
+      font-weight: 600;
+    }
+    @media (max-width: 560px) {
+      .card { padding: 36px 24px; }
+      h1 { font-size: 1.6rem; }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+  <div class="card">
+    <div class="badge">
+      <span class="badge-dot"></span>
+      Campaign Reporting System
+    </div>
+
+    <h1>Generate a fresh report</h1>
+    <p class="sub">Click below to pull the latest Facebook Ads data and update all your campaign reports. You'll receive an email with a link when it's ready — usually within 2 minutes.</p>
+
+    <button class="btn" id="triggerBtn" onclick="triggerReport()">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="23 4 23 10 17 10"></polyline>
+        <polyline points="1 20 1 14 7 14"></polyline>
+        <path d="M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15"></path>
+      </svg>
+      <span id="btnText">Generate Report Now</span>
+      <div class="spinner" id="spinner"></div>
+    </button>
+
+    <div class="status success" id="statusSuccess">
+      ✅ Report generation started! Check your email in about 2 minutes.
+    </div>
+    <div class="status error" id="statusError">
+      ⚠️ Something went wrong. Please try again or contact Lara.
+    </div>
+
+    <hr class="divider"/>
+    <p class="note">This will refresh all active campaign reports. Reports are also updated automatically every 3 days for active campaigns.</p>
+  </div>
+
+  <div class="footer">
+    Powered by <a href="https://noinkmarketing.com.au" target="_blank">No Ink Marketing</a>
+    &nbsp;·&nbsp;
+    <a href="https://kentrohl.com.au" target="_blank">← Back to kentrohl.com.au</a>
+  </div>
+</div>
+
+<script>
+  // ─────────────────────────────────────────────────────────────────────────
+  // IMPORTANT: Replace this URL with the webhook URL from your Make.com relay
+  // scenario after importing relay_scenario_blueprint.json
+  // ─────────────────────────────────────────────────────────────────────────
+  var WEBHOOK_URL = "https://hook.us2.make.com/zkl4qiecpu6xuv4ywm9d0p1c7ampy5gq";
+  // ─────────────────────────────────────────────────────────────────────────
+
+  function triggerReport() {
+    if (WEBHOOK_URL === "REPLACE_WITH_WEBHOOK_URL") {
+      document.getElementById("statusError").textContent = "⚠️ Webhook URL not configured yet. Contact Lara to finish setup.";
+      document.getElementById("statusError").classList.add("show");
+      return;
+    }
+
+    var btn = document.getElementById("triggerBtn");
+    var btnText = document.getElementById("btnText");
+    var spinner = document.getElementById("spinner");
+    var successEl = document.getElementById("statusSuccess");
+    var errorEl = document.getElementById("statusError");
+
+    btn.disabled = true;
+    btnText.textContent = "Starting…";
+    spinner.classList.add("show");
+    successEl.classList.remove("show");
+    errorEl.classList.remove("show");
+
+    fetch(WEBHOOK_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ source: "kent-trigger-page", timestamp: new Date().toISOString() })
+    })
+    .then(function(res) {
+      spinner.classList.remove("show");
+      if (res.ok || res.status === 200) {
+        btnText.textContent = "Generate Report Now";
+        btn.disabled = false;
+        successEl.classList.add("show");
+      } else {
+        throw new Error("HTTP " + res.status);
+      }
+    })
+    .catch(function(err) {
+      spinner.classList.remove("show");
+      btnText.textContent = "Generate Report Now";
+      btn.disabled = false;
+      errorEl.classList.add("show");
+      console.error("Trigger error:", err);
+    });
+  }
+</script>
+</body>
+</html>
